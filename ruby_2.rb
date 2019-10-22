@@ -27,9 +27,8 @@ module Enumerable
 		is_this_true = true
 		self.my_each  do |i| 
 			is_this_true = false unless yield(i) 
-			if is_this_true == false
-				break
-			end
+      break unless its_all_false
+      
 		end
 		is_this_true 
   end
@@ -38,5 +37,21 @@ module Enumerable
 		is_this_false = false
 		self.my_each {|i| is_this_false = true if yield(i)}
 		is_this_false
-	end
+  end
+  
+  def my_none?
+		its_all_false = true
+		self.my_each do |i| 
+			its_all_false = false if yield(i)
+      break unless its_all_false
+    end
+		its_all_false
+  end
+  
+  def my_count(to_count)
+		num = 0
+		self.my_each {|i| num += 1 if i == to_count}
+	  num
+  end
+
 end
