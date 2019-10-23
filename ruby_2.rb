@@ -53,5 +53,17 @@ module Enumerable
 		self.my_each {|i| num += 1 if i == to_count}
 	  num
   end
+  
+  def my_map(&proc)
+		result = []
+		if proc
+			self.my_each {|i| new_array << proc.call(i)}
+			result
+		else
+			self.my_each {|i| new_array << yield(i)}
+			result
+		end
+	end
+    
 
 end
