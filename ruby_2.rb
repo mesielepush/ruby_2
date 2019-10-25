@@ -21,13 +21,13 @@ module Enumerable
   
   def my_select
     selected = []
-    self.my_each { |i| selected << i if yield(i) }
+    my_each { |i| selected << i if yield(i) }
     selected
   end
 
   def my_all? 
 		is_this_true = true
-		self.my_each  do |i| 
+		my_each  do |i| 
 			is_this_true = false unless yield(i) 
       break unless its_all_false
     end
@@ -36,13 +36,13 @@ module Enumerable
   
   def my_any? 
 		is_this_false = false
-		self.my_each {|i| is_this_false = true if yield(i)}
+		my_each {|i| is_this_false = true if yield(i)}
 		is_this_false
   end
   
   def my_none?
 		its_all_false = true
-		self.my_each do |i| 
+		my_each do |i| 
 			its_all_false = false if yield(i)
       break unless its_all_false
     end
@@ -51,25 +51,25 @@ module Enumerable
   
   def my_count(to_count)
 		num = 0
-		self.my_each {|i| num += 1 if i == to_count}
+		my_each {|i| num += 1 if i == to_count}
 	  num
   end
   
   def my_map(&proc)
 		result = []
 		if proc
-			self.my_each {|i| result << proc.call(i)}
+			my_each {|i| result << proc.call(i)}
 			result
 		else
-			self.my_each {|i| result << yield(i)}
+			my_each {|i| result << yield(i)}
 			result
 		end
 	end
   
   def my_inject(obj=nil)
-    yielding = obj ? obj : self.shift
+    yielding = obj ? obj : shift
    
-    self.my_each do |x|
+    my_each do |x|
       yielding = yield(yielding, x)
     end
    
