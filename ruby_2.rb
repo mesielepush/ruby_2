@@ -57,13 +57,26 @@ module Enumerable
   def my_map(&proc)
 		result = []
 		if proc
-			self.my_each {|i| new_array << proc.call(i)}
+			self.my_each {|i| result << proc.call(i)}
 			result
 		else
-			self.my_each {|i| new_array << yield(i)}
+			self.my_each {|i| result << yield(i)}
 			result
 		end
 	end
-    
+  
+  def my_inject(obj=nil)
+    yielding = obj ? obj : self.shift
+   
+    self.my_each do |x|
+      yielding = yield(yielding, x)
+    end
+   
+    yielding
+  end
+
+  def multiply_els(arr)
+    arr.my_inject { |memo, x| memo * x }
+  end
 
 end
