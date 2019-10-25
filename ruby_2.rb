@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Style/CaseEquality 
-
 module Enumerable
   def my_each
     i = 0
