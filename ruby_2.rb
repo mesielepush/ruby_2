@@ -12,26 +12,26 @@ module Enumerable
 
   def my_each_with_index
     i = 0
-      while i < size
-        yield([i], i)
-        i+= 1
-      end
+    while i < size
+      yield([i], i)
+      i += 1
+    end
     self
   end
-  
+
   def my_select
     selected = []
     my_each { |i| selected << i if yield(i) }
     selected
   end
-
+  
   def my_all? 
-		is_this_true = true
-		my_each  do |i| 
-			is_this_true = false unless yield(i) 
-      break unless its_all_false
+    is_this_true = true
+    my_each  do |i| 
+      is_this_true = false unless yield(i) 
+    break unless its_all_false
     end
-		is_this_true 
+    is_this_true 
   end
   
   def my_any? 
