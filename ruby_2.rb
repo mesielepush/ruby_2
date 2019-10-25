@@ -36,15 +36,15 @@ module Enumerable
   
   def my_any?
     is_this_false = false
-	  my_each {|i| is_this_false = true if yield(i)}
+    my_each {|i| is_this_false = true if yield(i)}
     is_this_false
   end
-  
+
   def my_none?
 	  its_all_false = true
-	  my_each do |i| 
-	    its_all_false = false if yield(i)
-      break unless its_all_false
+    my_each do |i| 
+      its_all_false = false if yield(i)
+    break unless its_all_false
     end
 		its_all_false
   end
