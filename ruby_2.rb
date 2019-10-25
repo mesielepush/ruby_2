@@ -80,5 +80,4 @@ module Enumerable
   def multiply_els(arr)
     arr.my_inject { |memo, x| memo * x }
   end
-
 end
