@@ -27,23 +27,23 @@ module Enumerable
   
   def my_all? 
     is_this_true = true
-    my_each  do |i| 
+    my_each  do |i|
       is_this_true = false unless yield(i) 
-    break unless its_all_false
+      break unless its_all_false
     end
-    is_this_true 
+    is_this_true
   end
   
-  def my_any? 
-		is_this_false = false
-		my_each {|i| is_this_false = true if yield(i)}
-		is_this_false
+  def my_any?
+    is_this_false = false
+	  my_each {|i| is_this_false = true if yield(i)}
+    is_this_false
   end
   
   def my_none?
-		its_all_false = true
-		my_each do |i| 
-			its_all_false = false if yield(i)
+	  its_all_false = true
+	  my_each do |i| 
+	    its_all_false = false if yield(i)
       break unless its_all_false
     end
 		its_all_false
