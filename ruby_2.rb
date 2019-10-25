@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module Enumerable
-  def my_each(x)
+  def my_each
     i = 0
-    while i < x.size
-      yield(x[i])
+    while i < size
+      yield([i])
       i += 1
     end
     self
