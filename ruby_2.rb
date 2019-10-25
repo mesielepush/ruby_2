@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 # rubocop:disable Style/LineLength, Style/StringLiterals
+
 module Enumerable
 
   def my_each
@@ -7,18 +8,18 @@ module Enumerable
     while i < self.size
       yield(self[i])
       i += 1
-      end
+    end
     self
   end
-  
+
   def my_each_with_index
     i = 0
       while i < self.size
         yield(self[i], i)
         i+= 1
       end
-      self
-    end
+    self
+  end
   
   def my_select
     selected = []
@@ -31,8 +32,7 @@ module Enumerable
 		self.my_each  do |i| 
 			is_this_true = false unless yield(i) 
       break unless its_all_false
-      
-		end
+    end
 		is_this_true 
   end
   
