@@ -1,8 +1,8 @@
 # frozen_string_literal: true
-# rubocop:disable Style/LineLength, Style/StringLiterals
+
+# rubocop:disable Style/CaseEquality 
 
 module Enumerable
-
   def my_each
     i = 0
     while i < self.size
