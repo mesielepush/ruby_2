@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Enumerable
+
   def my_each
     i = 0
     while i < size
@@ -37,6 +38,7 @@ module Enumerable
       if yield(x)
         return true
       end
+    end
     false
   end
   
@@ -68,16 +70,13 @@ module Enumerable
   
   def my_inject(obj=nil)
     yielding = obj ? obj : shift
-   
     my_each do |x|
       yielding = yield(yielding, x)
     end
-   
     yielding
   end
 
   def multiply_els(arr)
     arr.my_inject { |memo, x| memo * x }
   end
-end
 end
