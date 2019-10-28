@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module Enumerable
-
   def my_each
     i = 0
     while i < size
@@ -12,7 +11,7 @@ module Enumerable
 
   def my_each_with_index
     ind = 0
-    self.my_each do |x|
+    my_each do |x|
       yield(x, ind)
       ind += 1
     end
@@ -35,9 +34,7 @@ module Enumerable
   
   def my_any?
     my_each do |x|
-      if yield(x)
-        return true
-      end
+      return true if yield(x)
     end
     false
   end
