@@ -33,13 +33,12 @@ module Enumerable
   end
   
   def my_any?
-    is_this_false = false
+    
     my_each do |i|
       if yield(i)
         return true
-      else
-        is_this_false
       end
+      false
   end
 
   def my_none?
