@@ -7,16 +7,14 @@ module Enumerable
       yield(self[i])
       i += 1
     end
-    
   end
 
   def my_each_with_index
     ind = 0
     self.my_each do |x|
-      yield(x,ind)
+      yield(x, ind)
       ind += 1
     end
-    
   end
 
   def my_select
@@ -24,7 +22,7 @@ module Enumerable
     my_each { |i| selected << i if yield(i) }
     selected
   end
-  
+
   def my_all? 
     is_this_true = true
     my_each  do |i|
