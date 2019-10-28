@@ -4,19 +4,19 @@ module Enumerable
   def my_each
     i = 0
     while i < size
-      yield([i])
+      yield(i)
       i += 1
     end
-    self
+    
   end
 
   def my_each_with_index
-    i = 0
-    while i < size
-      yield([i], i)
-      i += 1
+    ind = 0
+    my_each do |x|
+      yield(ind, x)
+      ind += 1
     end
-    self
+    
   end
 
   def my_select
@@ -29,7 +29,7 @@ module Enumerable
     is_this_true = true
     my_each  do |i|
       is_this_true = false unless yield(i) 
-      break unless its_all_false
+      break unless is_this_true
     end
     is_this_true
   end
@@ -37,8 +37,10 @@ module Enumerable
   def my_any?
     is_this_false = false
     my_each do |i|
-      is_this_false = true if yield(i)
-    is_this_false
+      if yield(i)
+        return true
+      else
+        is_this_false
   end
 
   def my_none?
@@ -80,4 +82,5 @@ module Enumerable
   def multiply_els(arr)
     arr.my_inject { |memo, x| memo * x }
   end
+end
 end
