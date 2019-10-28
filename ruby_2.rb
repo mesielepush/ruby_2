@@ -25,9 +25,9 @@ module Enumerable
 
   def my_all?
     is_this_true = true
-    my_each  do |i|
-      is_this_true = false unless yield(i) 
-      break unless is_this_true
+    my_each do |i|
+    is_this_true = false unless yield(i) 
+    break unless is_this_true
     end
     is_this_true
   end
