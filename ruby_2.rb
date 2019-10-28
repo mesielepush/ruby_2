@@ -23,7 +23,7 @@ module Enumerable
     selected
   end
 
-  def my_all? 
+  def my_all?
     is_this_true = true
     my_each  do |i|
       is_this_true = false unless yield(i) 
