@@ -31,14 +31,14 @@ module Enumerable
     end
     is_this_true
   end
-  
+
   def my_any?
     my_each do |x|
       return true if yield(x)
     end
     false
   end
-  
+
   def my_none?
     its_all_false = true
     my_each do |i|
@@ -47,15 +47,15 @@ module Enumerable
     end
     its_all_false
   end
-  
+
   def my_count(to_count)
     num = 0
     my_each { |i| num += 1 if i == to_count }
     num
   end
-  
+
   def my_map(&proc)
-	  result = []
+    result = []
     if proc
       my_each { |i| result << proc.call(i) }
     else
