@@ -33,8 +33,8 @@ module Enumerable
   end
   
   def my_any?
-    my_each do |i|
-      if yield(i)
+    my_each do |x|
+      if yield(x)
         return true
       end
     false
