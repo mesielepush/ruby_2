@@ -43,27 +43,25 @@ module Enumerable
     its_all_false = true
     my_each do |i|
       its_all_false = false if yield(i)
-    break unless its_all_false
+      break unless its_all_false
     end
-		its_all_false
+	  its_all_false
   end
   
   def my_count(to_count)
-		num = 0
-		my_each {|i| num += 1 if i == to_count}
+	  num = 0
+    my_each { |i| num += 1 if i == to_count }
 	  num
   end
   
   def my_map(&proc)
-		result = []
-		if proc
-			my_each {|i| result << proc.call(i)}
-			result
-		else
-			my_each {|i| result << yield(i)}
-			result
-		end
-	end
+	  result = []
+	  if proc
+		  my_each { |i| result << proc.call(i) }
+	  else
+      my_each { |i| result << yield(i) }
+	  end
+  end
   
   def my_inject(obj=nil)
     yielding = obj ? obj : shift
@@ -72,7 +70,7 @@ module Enumerable
     end
     yielding
   end
-
+  
   def multiply_els(arr)
     arr.my_inject { |memo, x| memo * x }
   end
