@@ -34,12 +34,12 @@ module Enumerable
   
   def my_any?
     my_each do |i|
-    if yield(i)
-      return true
-    end
+      if yield(i)
+        return true
+      end
     false
   end
-
+  
   def my_none?
     its_all_false = true
     my_each do |i|
