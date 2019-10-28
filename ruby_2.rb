@@ -64,13 +64,13 @@ module Enumerable
   end
 
   def my_inject(obj = nil)
-    yielding = obj ? obj : shift
+    yielding = obj || shift
     my_each do |x|
       yielding = yield(yielding, x)
     end
     yielding
   end
-  
+
   def multiply_els(arr)
     arr.my_inject { |memo, x| memo * x }
   end
