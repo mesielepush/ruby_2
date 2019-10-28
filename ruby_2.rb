@@ -45,25 +45,25 @@ module Enumerable
       its_all_false = false if yield(i)
       break unless its_all_false
     end
-	  its_all_false
+    its_all_false
   end
   
   def my_count(to_count)
-	  num = 0
+    num = 0
     my_each { |i| num += 1 if i == to_count }
-	  num
+    num
   end
   
   def my_map(&proc)
 	  result = []
-	  if proc
-		  my_each { |i| result << proc.call(i) }
-	  else
+    if proc
+      my_each { |i| result << proc.call(i) }
+    else
       my_each { |i| result << yield(i) }
-	  end
+    end
   end
-  
-  def my_inject(obj=nil)
+
+  def my_inject(obj = nil)
     yielding = obj ? obj : shift
     my_each do |x|
       yielding = yield(yielding, x)
