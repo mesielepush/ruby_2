@@ -4,7 +4,7 @@ module Enumerable
   def my_each
     i = 0
     while i < size
-      yield(i)
+      yield(self[i])
       i += 1
     end
     
@@ -12,8 +12,8 @@ module Enumerable
 
   def my_each_with_index
     ind = 0
-    my_each do |x|
-      yield(ind, x)
+    self.my_each do |x|
+      yield(x,ind)
       ind += 1
     end
     
@@ -41,6 +41,7 @@ module Enumerable
         return true
       else
         is_this_false
+      end
   end
 
   def my_none?
