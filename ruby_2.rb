@@ -23,7 +23,7 @@ module Enumerable
 
   def my_select
     return to_enum unless block_given?
-    
+
     selected = []
     my_each { |i| selected << i if yield(i) }
     selected
