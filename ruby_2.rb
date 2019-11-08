@@ -3,6 +3,7 @@
 module Enumerable
   def my_each
     return to_enum unless block_given?
+
     i = 0
     while i < size
       yield(self[i])
@@ -12,6 +13,7 @@ module Enumerable
 
   def my_each_with_index
     return to_enum unless block_given?
+
     ind = 0
     my_each do |x|
       yield(x, ind)
@@ -21,6 +23,7 @@ module Enumerable
 
   def my_select
     return to_enum unless block_given?
+    
     selected = []
     my_each { |i| selected << i if yield(i) }
     selected
