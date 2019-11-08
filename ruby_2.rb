@@ -91,10 +91,15 @@ module Enumerable # rubocop:disable Metrics/ModuleLength
   def my_count(field = nil)
     return length if !block_given? && !field
 
-    num = 0
-    my_each { |i| num += 1 if i == field }
-
-    num
+    item = 0
+    length.times do |x|
+      if field
+        item += 1 if field == self[x]
+      elsif yield(self[x])
+        item += 1
+      end
+    end
+    item
   end
 
   def my_map(my_proc = false)
