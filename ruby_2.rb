@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Enumerable
+module Enumerable # rubocop:disable Metrics/ModuleLength
   def my_each
     return to_enum unless block_given?
 
@@ -29,44 +29,83 @@ module Enumerable
     selected
   end
 
-  def my_all?
-    is_this_true = true
-    my_each do |i|
-      is_this_true = false unless yield(i)
-      break unless is_this_true
+  def my_all?(field = nil) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+    value = true
+    length.times do |x|
+      if !field.nil?
+        if field.instance_of? Regexp
+          value = false unless self[x].match(field)
+        elsif field.respond_to?(:is_a?) && (field.is_a?(String) || field.is_a?(Integer))
+          value = false if field != self[x]
+        elsif field.respond_to?(:is_a?) && !(self[x].is_a? field)
+          value = false
+        end
+      elsif block_given?
+        value = false unless yield(self[x])
+      else
+        value = false unless self[x]
+      end
     end
-    is_this_true
+    value
   end
 
-  def my_any?
-    my_each do |x|
-      return true if yield(x)
+  def my_any?(field = nil) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+    value = false
+    length.times do |x|
+      if !field.nil?
+        if field.instance_of? Regexp
+          value = true if self[x].match(field)
+        elsif field.respond_to?(:is_a?) && (field.is_a?(String) || field.is_a?(Integer))
+          value = true if field == self[x]
+        elsif field.respond_to?(:is_a?) && (self[x].is_a? field)
+          value = true
+        end
+      elsif block_given?
+        value = true if yield(self[x])
+      elsif self[x]
+        value = true
+      end
     end
-    false
+    value
   end
 
-  def my_none?
-    its_all_false = true
-    my_each do |i|
-      its_all_false = false if yield(i)
-      break unless its_all_false
+  def my_none?(field = nil) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+    length.times do |x|
+      if !field.nil?
+        if field.instance_of? Regexp
+          return false if self[x].match(field)
+        elsif field.respond_to?(:is_a?) && (field.is_a?(String) || field.is_a?(Integer))
+          return false if field == self[x]
+        elsif field.respond_to?(:is_a?) && (self[x].is_a? field)
+          return false
+        end
+      elsif block_given?
+        return false if yield(self[x])
+      elsif self[x]
+        return false
+      end
     end
-    its_all_false
+    true
   end
 
-  def my_count(to_count)
+  def my_count(field = nil)
+    return length if !block_given? && !field
+
     num = 0
-    my_each { |i| num += 1 if i == to_count }
+    my_each { |i| num += 1 if i == field }
+
     num
   end
 
-  def my_map(&proc)
-    result = []
-    if proc
-      my_each { |i| result << proc.call(i) }
-    else
-      my_each { |i| result << yield(i) }
+  def my_map(my_proc = false)
+    return to_enum unless block_given?
+
+    item = []
+    length.times do |x|
+      result = my_proc ? my_proc.call(self[x]) : yield(self[x])
+      item.push(result)
     end
+    item
   end
 
   def my_inject(field = nil, second = nil) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
